@@ -1,4 +1,4 @@
-name: TVer Auto Collector
+name: TVer Auto Collector v2
 
 on:
   schedule:
