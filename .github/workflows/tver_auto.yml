@@ -2,8 +2,8 @@ name: TVer Auto Collector
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # 10분마다 실행
-  workflow_dispatch: # 수동으로 즉시 실행 버튼 제공
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,9 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -34,6 +31,10 @@ jobs:
       - name: Commit and push generated html
         run: |
           git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.io"
+          git add index.html
+          git commit -m "Auto-update TVer index.html [skip ci]" || exit 0
+          git push
           git config --global user.email "github-actions[bot]@users.noreply.github.io"
           git add index.html
           git commit -m "Auto-update TVer index.html [skip ci]" || exit 0
