@@ -8,7 +8,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 subprocess.run(["pkill", "-f", "termux-media-scan"], check=False)
 
-OUT_PATH    = "/storage/emulated/0/Movies/tver_manager.html"
+OUT_PATH    = "index.html"
+
 MAX_WORKERS = 16
 TIMEOUT     = 15
 
