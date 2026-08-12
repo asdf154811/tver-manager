@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -34,12 +37,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.io"
           git add index.html
           git commit -m "Auto-update TVer index.html [skip ci]" || exit 0
-          git push
-          git push
-          git config --global user.email "github-actions[bot]@users.noreply.github.io"
-          git add index.html
-          git commit -m "Auto-update TVer index.html [skip ci]" || exit 0
-          git push
-          git add .
-          git commit -m "Auto-update TVer data" || exit 0
           git push
