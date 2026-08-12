@@ -3,7 +3,7 @@
 # TAGS: 티버, 목록
 #!/usr/bin/env python3
 import json, re, requests, subprocess
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 subprocess.run(["pkill", "-f", "termux-media-scan"], check=False)
@@ -973,7 +973,11 @@ render();
 
 if __name__ == "__main__":
     data, cat_meta = fetch_all()
-    now_str = datetime.now().strftime("%m/%d %H:%M")
+    
+    # UTC 기준 시간에 9시간을 더해 한국 시간(KST)으로 변환
+    kst = timezone(timedelta(hours=9))
+    now_str = datetime.now(kst).strftime("%m/%d %H:%M")
+
     html = HTML.replace("@DATA_JSON@", json.dumps(data, ensure_ascii=False))
     html = html.replace("@CAT_META_JSON@", json.dumps(cat_meta, ensure_ascii=False))
     html = html.replace("@GENERATED_AT@", now_str)
